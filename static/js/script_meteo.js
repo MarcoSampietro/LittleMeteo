@@ -57,7 +57,7 @@ button.addEventListener('click', function () {
         .catch(err => {
             // Se si verifica un errore, nascondi la card meteo e mostra un avviso
             weatherCard.style.display = 'none';
-            alert("Nome della città inesistente");
+            alert("City not found");
         });
 });
 
@@ -70,15 +70,14 @@ forecastButton.addEventListener('click', function () {
             console.log(data);
             // Estrai i dati del forecast dalla risposta
             var forecastData = data['list'];
-            var forecastHTML = "<p>Forecast for the next 5 days</p><ul>";
+            var forecastHTML = "<p>Forecast for the next 5 days</p>";
             // Ciclo attraverso i dati del forecast e crea una lista HTML
             for (var i = 0; i < forecastData.length; i += 8) {
                 var forecastDateTime = new Date(forecastData[i]['dt'] * 1000);
                 var forecastDate = forecastDateTime.toLocaleDateString('en-US');
                 var forecastDesc = forecastData[i]['weather'][0]['description'];
-                forecastHTML += "<li>" + forecastDate + ": " + forecastDesc + "</li>";
+                forecastHTML += "<ul>" + forecastDate + ": " + forecastDesc + "</ul>";
             }
-            forecastHTML += "</ul>";
             // Aggiorna il contenuto HTML del div del forecast e mostra il div
             forecastDiv.innerHTML = forecastHTML;
             forecastDiv.style.display = 'block';
